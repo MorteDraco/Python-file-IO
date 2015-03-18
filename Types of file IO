@@ -24,3 +24,10 @@ Second line of the file
 ]
 >>> sorted(student_tuples, key=lambda student: student[2])   # sort by age
 [('dave', 'B', 10), ('jane', 'B', 12), ('john', 'A', 15)]
+
+
+#smple sorting:
+>>> a = [5, 2, 3, 1, 4]
+>>> a.sort()
+>>> a
+[1, 2, 3, 4, 5]
