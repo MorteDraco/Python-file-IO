@@ -31,3 +31,15 @@ Second line of the file
 >>> a.sort()
 >>> a
 [1, 2, 3, 4, 5]
+
+
+#how to organise all stuff
+my_file = open("Names.txt", "w")
+
+for i in range(1, 4):
+    my_file.write(str(input("Please enter a name")) + ", \n")
+
+my_file.close()
+
+print ("".join(sorted(open("Names.txt", "r"))))
+
