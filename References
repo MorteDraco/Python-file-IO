@@ -10,4 +10,11 @@ http://code.activestate.com/recipes/440612-sort-a-file/
 
 https://docs.python.org/2/howto/sorting.html
 
+#basics 
 http://www.tutorialspoint.com/python/python_files_io.htm
+
+#sort out alphabetically
+http://stackoverflow.com/questions/18027660/python-import-names-file-and-sort-alphabetically
+
+#sorting and opening files:
+http://stackoverflow.com/questions/19615402/sorting-and-opening-and-writing-a-file
