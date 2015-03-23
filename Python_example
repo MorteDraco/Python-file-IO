@@ -1,0 +1,21 @@
+with open("scoreA.txt") as f:
+
+    d = {}
+
+    for line in f:
+        column = line.split(":")
+        names = column[0]
+        scores = int(column[1].strip())
+
+        count = 0
+        while count < 3:
+            d.setdefault(names, []).append(scores)
+            count = count + 1
+
+    averages=[]
+    for name, v in d.items():
+        average = (sum(v[-3:])/len(v[-3:]))
+        averages.append((name, average))
+
+    for name, average in sorted(averages, key=lambda a: a[1], reverse=True):
+        print(name, average)
