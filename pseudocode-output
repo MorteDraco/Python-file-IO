@@ -1,0 +1,25 @@
+#output for quiz to show results
+
+open name file 'w' as f:
+  sort file in alpha order
+  
+print lines
+close file
+
+with open name file as f:
+  colum = split line ':'
+  names = colum
+  scores into colum + strip
+  
+  count = 0
+  while count less than 3:
+    appnd scores 
+    count + 1
+    
+  aveages = empty
+  for name in itmes:
+  find aveage
+  append average 
+  
+  sort name, average, revsere
+    print (name and avegare)
