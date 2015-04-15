@@ -1,0 +1,57 @@
+import csv
+
+#link to file
+f = open('TempByMonth.csv') # insert file here
+#allow to itrate over given .csv file
+csv_f = csv.reader(f)
+
+#empty list to store data
+newlist = []
+
+#iratre thourgh
+for row in csv_f:
+
+    #convert string to int
+    row[1] = int(row[1])
+    row[2] = int(row[2])
+    row[3] = int(row[3])
+    row[4] = int(row[4])
+    
+
+    #finds the lowest temp
+    minimum = min(row[1:4])
+    #adds to list
+    row.append(minimum)
+
+    #finds maximum
+    maximum = max(row[1:4])
+    #adds to list
+    row.append(maximum)
+
+    #finds average
+    average = round(sum(row[1:4])/3)
+    #add to list
+    row.append(average)
+    
+    #adding each row to newlist ( add more to y ([x:y]) to increase display
+    newlist.append(row[0:8])
+    
+print(newlist)
+
+#sorting data: lowest temp by month
+lowTemp = [[x[5], x[0]] for x in newlist]
+
+print('\n lowest temp by month \n')
+
+#itarte
+for entry in sorted(lowTemp):
+    print(entry)
+
+#sorting data: highst temp
+averageTemp = [[x[7], x[0]] for x in newlist]
+
+print('\nHighest temp by month \n')
+
+#itatre
+for entry in sorted(averageTemp, reverse = True):
+    print(entry)
