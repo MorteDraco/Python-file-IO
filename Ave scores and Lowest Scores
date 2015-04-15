@@ -12,6 +12,7 @@ csv_f = csv.reader(f)
 
 
 
+
 newlist = []
 
 for row in csv_f:
