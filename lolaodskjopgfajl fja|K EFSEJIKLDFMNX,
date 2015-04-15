@@ -1,0 +1,108 @@
+I am trying to create a very basic scoreboard system. Scores to be read into a list from a file. If name exists the list to be updated with further scores (append). New line to be created if name does not exist. I think its the append new score to list that's not working. Any help appreciated - learning.
+
+message=""
+
+#ask for name and score
+name = input("Please enter the name you wish to add")
+score = input("Please enter the high score")
+
+#open the highscores line and read in all the lines to a list called ScoresList.
+#  Then close the file.
+scoresFile = open("highscores.txt","r")
+ScoresList = scoresFile.readlines()
+scoresFile.close()
+
+#for each line in the ScoresList list
+for i in range(0, len(ScoresList) ):
+
+    #check to see if the name is in the line
+    if name in ScoresList[i]:
+
+        #append new score to list
+        tempscore= ScoresList[i]
+        ScoresList[i]=tempscore.append(score)
+        message="Updated"
+
+        #write the scores back to the file. Overwrite with the new list
+        scoresFile = open("highscores.txt","w")
+        for line in ScoresList:
+            scoresFile.write(line + "\n")
+        scoresFile.close()
+
+    else:
+       message = "Not updated"
+
+if message=="":
+        scoresFile = open("highscores.txt","a")
+        scoresFile.write(name + str(score)+"\n")
+        scoresFile.close()
+python list append
+shareimprove this question
+edited Jan 4 at 22:16
+
+asked Jan 4 at 21:53
+
+learningpython
+235
+add a comment
+1 Answer
+activeoldestvotes
+up vote
+1
+down vote
+accepted
+ScoresList[i]=tempscore.append(score) makes ScoresList[i] equal to None as append is an in place method. So you are storing all None's in your  ScoresList.
+
+If you want to add a score to the name:
+
+name = input("Enter your name").rstrip() # make "foo" == "foo "
+score = input("Enter your score")
+with open("highscores.txt","a+") as f: # a+ will allow us to read and will also create the file if it does not exist
+    scores_list = f.readlines()
+     # if scores_list is empty this is our first run
+    if not scores_list:
+        f.write("{} {}\n".format(name, score))
+    else:
+        # else check for name and update score
+        new_names = []
+        for ind, line in enumerate(scores_list):
+            # if name exists update name and score
+            if name in line.split():
+                scores_list[ind] = "{} {}\n".format(name, score)
+                break # break so we don't add existing name to new names
+        else:
+            # else store new name and score
+            new_names.append("{} {}\n".format(name, score))
+
+
+        # all scores updated so open and overwrite
+        with open("highscores.txt","w") as scores_file:
+             scores_file.writelines(scores_list + new_names)
+You also you already have all the scores in a list so open the file just once outside the loop when ScoresList is updated and overwrite instead of repeatedly opening each time.
+
+If you want to add new scores instead of overwriting the score add score to the line instead of the name:
+
+scores_list[ind] = "{} {}\n".format(line.rstrip(), score)
+If you want to separate by commas and append each new score to exisiting names:
+
+with open("highscores.txt","a+") as f: # a+ will allow us to read and will also create the file if it does not exist
+    scores_list = f.readlines()
+     # if scores_list is empty this is our first run
+    if not scores_list:
+        f.write("{},{}\n".format(name, score))
+    else:
+        # else check for name and update score
+        new_names = []
+        for ind, line in enumerate(scores_list):
+            # if name exists update name and score
+            if name.rstrip() in line.split(","):
+                scores_list[ind] = "{},{}\n".format(line.rstrip(), score)
+                break # break so we don't add existing name to new names
+        else:
+            # else store new name and score
+            new_names.append("{},{}\n".format(name, score))
+
+
+        # all scores updated so open and overwrite
+        with open("highscores.txt","w") as scores_file:
+             scores_file.writelines(scores_list + new_names)
