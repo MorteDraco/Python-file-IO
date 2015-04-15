@@ -1,0 +1,18 @@
+import collections
+
+
+
+with open("scoreA.txt", mode="r",encoding="utf-8") as fp:
+    count = collections.defaultdict(int)
+    rev = reversed(fp.readlines())
+    rev_out = []
+
+    for line in rev:
+        name, value = line.split(',')
+        if count[name] >= 3:
+            continue
+        count[name] += 1
+        rev_out.append((name, value))
+
+out = list(reversed(rev_out))
+print (out)
