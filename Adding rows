@@ -1,4 +1,0 @@
-def add_friend(friend_info, friends_list):
-    with open(friends_list, 'a') as fapp:
-        writer = csv.writer(fapp)
-        writer.writerow(friend_info)
