@@ -1,0 +1,84 @@
+# anoying quiz 1
+import random, time, string
+questions = 0
+score = 0
+
+def intro():#define the intro
+    '''introduction'''
+    print('welcome to the impossible quiz!')
+
+def play():
+    '''play'''
+    play = str(input('would you like to play?\n(yes / no)\n'))#take user input to check if they want to play again.
+    if play == 'yes' or play == 'y': #user inputs yes
+        quiz2()
+    else:  #player reutrns no
+        print('Dont take '+ play + ' as an answer... play quiz!!!')
+        play2()
+def play2():
+    play()
+def quiz(): #part 1 of the quiz
+    '''quiz'''
+    global questions, score
+    userinput = input().upper()
+    answer = 'hello'
+    
+    if userinput == answer:
+        print('correct')
+        questions = questions + 1 #add question number 
+        score = int(score)
+        score=score + 1
+        score = str(score)#convert to string to read
+
+    elif userinput != answer:
+        questions = questions + 1
+        print('wrong, answer was: '+answer+' duh!!')
+
+
+
+def quiz2(): #part 2 of the quiz
+    '''quiz2'''
+    global questions, score
+    while questions <= 9: #check if questions are below 10
+        quiz() #play the question
+
+    score = str(score)
+    print('your score was '+score+'/10\n ')
+
+    name = input(str('your name: '))
+   
+    scores =open('highscores.txt','a')
+    scores.write(''+ name +':'+ score +'\n')
+    scores.close()
+
+
+    start()
+
+def scores1():
+    scores = open('highscores', 'r')
+    linelist = scores.readlines()
+    linelist.sort()
+    for line in linelist:
+        print(line)
+
+def menu():
+    choice=input(str('What would you like? s / p\n'))
+    if  choice == 'play' or choice == 'p':
+        play()
+    elif choice == 's':
+        scores1()
+        
+
+                 
+def start(): # start menu
+    '''start'''
+    intro()
+    menu()
+
+
+
+start()
+   
+   
+      
+

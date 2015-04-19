@@ -1,0 +1,62 @@
+# anoying quiz 1
+import random, time, string
+questions = 0
+score = 0
+
+def intro():#define the intro
+    '''introduction'''
+    print('welcome to the impossible quiz!\nplease enter your name')
+
+def play():
+    '''play'''
+    play = str(input('would you like to play?\n(yes / no)\n'))#take user input to check if they want to play again.
+    if play == 'yes' or play == 'y': #user inputs yes
+        quiz2()
+    else:  #player reutrns no
+        print('Invalid')
+        play2()
+def play2():
+    play()
+def quiz(): #part 1 of the quiz
+    '''quiz'''
+    global questions, score
+    userinput = input().upper()
+    answer = 'hello'
+    
+    if userinput == answer:
+        print('correct')
+        questions = questions + 1 #add question number 
+        score = int(score)
+        score=score + 1
+        score = str(score)#convert to string to read
+
+    elif userinput != answer:
+        questions = questions + 1
+        print('wrong, answer was: '+answer+'')
+
+
+
+def quiz2(): #part 2 of the quiz
+    '''quiz2'''
+    global questions, score
+    while questions <= 9: #check if questions are below 10
+        quiz() #play the question
+    score = str(score)
+    print('your score was '+score+'/10\n ')
+    name = input(str('your name: '))
+    scores =open('highscores.txt','a') #change file here
+
+    scores.write('\n'+name +' '+ score+'')
+    scores.close()
+    start()
+
+def start(): # start menu
+    '''start'''
+    intro()
+
+    play()
+start()
+   
+   
+      
+
