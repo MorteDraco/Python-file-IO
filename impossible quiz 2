@@ -55,11 +55,9 @@ def quiz2(): #part 2 of the quiz
     start()
 
 def scores1():
-    scores = open('highscores', 'r')
-    linelist = scores.readlines()
-    linelist.sort()
-    for line in linelist:
-        print(line)
+    with open('highscores.txt', 'r') as r:
+        for line in sorted(r):
+            print(line, end='')
 
 def menu():
     choice=input(str('What would you like? s / p\n'))
