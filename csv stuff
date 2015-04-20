@@ -24,4 +24,4 @@ else:
     print("Your score has been saved")
     print(stuff)
 
-stuff.append(row[0] + str(row[1]))xxxsamxandyrewxxx
+stuff.append(row[0] + str(row[1]))
