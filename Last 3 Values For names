@@ -1,0 +1,23 @@
+name = input("Enter your name").rstrip() # make "foo" == "foo "
+score = input("Enter your score")
+with open("highscores.txt","a+") as f: # a+ will allow us to read and will also create the file if it does not exist
+    scores_list = f.readlines()
+     # if scores_list is empty this is our first run
+    if not scores_list:
+        f.write("{},{}\n".format(name, score))
+    else:
+        # else check for name and update score
+        new_names = []
+        for ind, line in enumerate(scores_list):
+            # if name exists update name and score
+            if name.rstrip() in line.split(","):
+                scores_list[ind] = "{},{}\n".format(line.rstrip(), score)
+                break # break so we don't add existing name to new names
+        else:
+            # else store new name and score
+            new_names.append("{},{}\n".format(name, score))
+
+
+        # all scores updated so open and overwrite
+        with open("highscores.txt","w") as scores_file:
+             scores_file.writelines(scores_list + new_names)
