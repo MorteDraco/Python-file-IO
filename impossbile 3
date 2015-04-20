@@ -47,7 +47,7 @@ def quiz2(): #part 2 of the quiz
 
     name = input(str('your name: '))
    
-    scores =open('highscores.txt','a')
+    scores =open('testAppend.txt','a')
     scores.write(''+ name +':'+ score +'\n')
     scores.close()
 
@@ -56,13 +56,13 @@ def quiz2(): #part 2 of the quiz
 
 def scores1():
     print('\nPeople who have taken quiz:\n')
-    with open('highscores.txt', 'r') as r:
+    with open('testAppend.txt', 'r') as r:
         for line in sorted(r): # sort linies 
             print(line, end='') # end the list of names
 
 def stats():
     print('\nHigh scores\n')
-    with open("highscores.txt") as f:
+    with open("testAppend.txt") as f:
 
         d = {}
 
@@ -85,7 +85,7 @@ def stats():
             print(name, average)
 
 def lastT():
-    with open("highscores.txt", mode="r",encoding="utf-8") as fp:
+    with open("testAppend.txt", mode="r",encoding="utf-8") as fp:
             count = collections.defaultdict(int)
             rev = reversed(fp.readlines())
             rev_out = []
@@ -123,5 +123,3 @@ def start(): # start menu
 start()
    
    
-      
-
