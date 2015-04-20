@@ -25,5 +25,3 @@ else:
     print(stuff)
 
 stuff.append(row[0] + str(row[1]))
-
- by xxxandyrew-phillipsxxx
