@@ -20,6 +20,7 @@ def play2():
 def quiz(): #part 1 of the quiz
     '''quiz'''
     global questions, score
+    print("Finish this sentance: ________, My name is Greg")
     userinput = input().upper()
     answer = 'HELLO'
     
