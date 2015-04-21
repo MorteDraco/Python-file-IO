@@ -20,7 +20,7 @@ def play2():
 def quiz(): #part 1 of the quiz
     '''quiz'''
     global questions, score
-    userinput = input().upper()
+    userinput = input().lower()
     answer = 'hello'
     
     if userinput == answer:
