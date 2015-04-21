@@ -5,7 +5,7 @@ score = 0
 
 def intro():#define the intro
     '''introduction'''
-    print('welcome to the impossible quiz!')
+    print('welcome to the Easy quiz!')
 
 def play():
     '''play'''
