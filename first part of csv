@@ -1,0 +1,33 @@
+'''This is the possible code for the last three scores and the calculations for average, the rest is to come'''
+import csv
+f = open("book1.csv")
+ans = input("Please enter your name")
+csv_f = csv.reader(f)
+stuff = []
+attempt = 0
+for row in csv_f:
+    row[0] = str(row[0])
+    row[1] = int(row[1])
+    row[2] = int(row[2])
+    row[3] = int(row[3])
+    row[4] = int(row[4])
+    minimum = min((row[1]),(row[2]),(row[3]),(row[4])) #minimum scores
+    maximum = max((row[1]),(row[2]),(row[3]),(row[4])) #maximum scores
+    Average = ((row[1]) + (row[2]) + (row[3]) + (row[4]))/4  #average
+    stuff.append(str(row[0]) +': ' + str(Average) +'  maximum: ' + str(maximum) +'  Minimum: ' + str(minimum))   
+    stuff.sort()
+print(stuff)
+    #if row[0] == ans:              #this part checks for more than three atempts
+        
+        #attempt = attempt+1
+#if str(attempt) >= '3':
+    #print("You have used up your available attempts. Sorry.") 
+#else:
+    #print("Your score has been saved")
+    #print(stuff)
+        
+
+#stuff.append(row[0] + str(row[1])) #appends the score thingy to the dict. if valid
+
+
+
