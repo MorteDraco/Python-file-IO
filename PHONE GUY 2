@@ -1,14 +1,22 @@
 import collections, string
 
 questions = 0
+NmaeT = 0
 score = 0
 # START BLOCKS
 
 def print_numbers(numbers):  # print scores
-    print("People and scores::") 
-    for k, v in numbers.items():
-        print("Name:", k, "\tNumber:", v)
-    print() # empty line
+    print("People and scores::")
+    with open('highscores.txt', 'r') as r:
+        for k, v in numbers.items():
+            print("Name:", k, "\tNumber:", v)
+        print() # empty line
+
+    print('\nPeople who have taken quiz:\n')
+    with open('highscores.txt', 'r') as r:
+        for line in sorted(r): # sort linies 
+            print(line, end='') # end the list of names
+
  
 def add_number(numbers, name, number):
     numbers[name] = number
@@ -73,12 +81,13 @@ def quiz2(): #part 2 of the quiz
         quiz() #play the question
 
     score = str(score)
-    print('your score was '+score+'/10\n ')
-    name = input('name:\n')
-    phone = score
-    add_number(numbers, name, number)
     
+    print('your score was '+score+'/10\n ')              #FIX THIS NOW!!!
+    name = input(str('name:\n'))
+    with open("highscores.txt") as f:               # FIX PRITNG TOP 3 AND AVERAGES
+        for line in f : 
 
+    
 def stats():  #AVERAGES
     print('\nHigh scores\n')
     with open("highscores.txt") as f:
