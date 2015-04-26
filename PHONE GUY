@@ -1,7 +1,12 @@
+import collections, string
+
 questions = 0
 score = 0
+# START BLOCKS
+
 def print_numbers(numbers):
-    print("Telephone Numbers:")
+    print("People and scores::")
+    
     for k, v in numbers.items():
         print("Name:", k, "\tNumber:", v)
     print()
@@ -11,7 +16,7 @@ def add_number(numbers, name, number):
  
 def lookup_number(numbers, name):
     if name in numbers:
-        return "The number is " + numbers[name]
+        return "score: " + numbers[name]
     else:
         return name + " was not found"
  
@@ -23,8 +28,10 @@ def play():
     else:  #player reutrns no
         print('Dont take '+ play + ' as an answer... play quiz!!!')
         play2()
+
 def play2():
     play()
+
 def quiz(): #part 1 of the quiz
     '''quiz'''
     global questions, score
@@ -44,7 +51,7 @@ def quiz(): #part 1 of the quiz
 
 def quiz2(): #part 2 of the quiz
     '''quiz2'''
-    global questions, score
+    global questions, score, name, numbers, number
     while questions <= 9: #check if questions are below 10
         quiz() #play the question
 
@@ -52,63 +59,94 @@ def quiz2(): #part 2 of the quiz
     print('your score was '+score+'/10\n ')
     print('name:')
     name = input()
-    add_number(phone_list, name, score)
+    numbers[name] = number
     filename = 'highscores.txt'
     save_numbers(phone_list, filename)
     
 def load_numbers(numbers, filename):
-    in_file = open(filename, "rt")
+    in_file = open('highscores.txt', "rt")
     while True:
         in_line = in_file.readline()
         if not in_line:
             break
         in_line = in_line[:-1]
-        name, number = in_line.split(",")
-        numbers[name] = number
+        name, numberO, numberT, numbeF = in_line.split(",")
+        numbers[name] = numberO, numberT, numbeF
     in_file.close()
  
 def save_numbers(numbers, filename):
-    out_file = open(filename, "wt")
+    out_file = open('highscores.txt', "wt")
     for k, v in numbers.items():
         out_file.write(k + "," + v + "\n")
     out_file.close()
- 
+
+def stats():
+    print('\nHigh scores\n')
+    with open("highscores.txt") as f:
+
+        d = {}
+
+        for line in f:
+            column = line.split(",")
+            names = column[0]
+            scores = int(column[1].strip())
+            scores2  = int(column[2].strip())
+            scores3 = int(column[3].strip())
+
+            count = 0
+            while count < 1:
+               d.setdefault(names, []).append(scores)
+               d.setdefault(names, []).append(scores2)
+               d.setdefault(names, []).append(scores3)
+               count = count + 1
+
+        averages=[]
+        for name, v in d.items():
+            average = (sum(v[-3:])/(len(v[-3:])))
+            averages.append((name, average))
+
+        for name, average in sorted(averages, key=lambda a: a[1], reverse=True):
+            print(name, average)
+
+
 def print_menu():
-    print('1. Print scores')
-    print('2. Add a score')
+    print('1. Print scores first 3')
     print('3, play quiz')
     print('4. Lookup a pupil')
     print('5. Load files')
     print('6. Save files')
+    print('10, prnt averages')
     print('7. Quit')
     print()
- 
+
+# END BLOCKS 
 phone_list = {}
 menu_choice = 0
 print_menu()
 while True:
-    menu_choice = int(input("Type in a number (1-7): "))
+    menu_choice = int(input("Choose: "))
+    filename = 'highscores.txt'
+    load_numbers(phone_list, filename)
+
     if menu_choice == 1:
         print_numbers(phone_list)
-    elif menu_choice == 2:  #change!!
-        print("Add Name and Number")
-        name = input("Name: ")
-        phone = input("Number: ")
-        add_number(phone_list, name, phone)
 
-        #remove_number(phone_list, name)
+
     elif menu_choice == 4:
         print("Lookup Number")
         name = input("Name: ")
         print(lookup_number(phone_list, name))
+
     elif menu_choice == 3:
         play()
-    elif menu_choice == 5:
-        filename = input("Filename to load: ")
-        load_numbers(phone_list, filename)
+    elif menu_choice == 10:
+        stats()
+ 
+
     elif menu_choice == 6:
-        filename = input("Filename to save: ")
+        filename = 'highscores.txt'
         save_numbers(phone_list, filename)
+
     elif menu_choice == 7:
         break
     else:
