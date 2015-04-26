@@ -1,3 +1,5 @@
+questions = 0
+score = 0
 def print_numbers(numbers):
     print("Telephone Numbers:")
     for k, v in numbers.items():
@@ -13,12 +15,47 @@ def lookup_number(numbers, name):
     else:
         return name + " was not found"
  
-def remove_number(numbers, name):
-    if name in numbers:
-        del numbers[name]
-    else:
-        print(name," was not found")
- 
+def play():
+    '''play'''
+    play = str(input('would you like to play?\n(yes / no)\n'))#take user input to check if they want to play again.
+    if play == 'yes' or play == 'y': #user inputs yes
+        quiz2()
+    else:  #player reutrns no
+        print('Dont take '+ play + ' as an answer... play quiz!!!')
+        play2()
+def play2():
+    play()
+def quiz(): #part 1 of the quiz
+    '''quiz'''
+    global questions, score
+    userinput = input()
+    answer = 'hello'
+    
+    if userinput == answer:
+        print('correct')
+        questions = questions + 1 #add question number 
+        score = int(score)
+        score=score + 1
+        score = str(score)#convert to string to read
+
+    elif userinput != answer:
+        questions = questions + 1
+        print('wrong, answer was: '+answer+' duh!!')
+
+def quiz2(): #part 2 of the quiz
+    '''quiz2'''
+    global questions, score
+    while questions <= 9: #check if questions are below 10
+        quiz() #play the question
+
+    score = str(score)
+    print('your score was '+score+'/10\n ')
+    print('name:')
+    name = input()
+    add_number(phone_list, name, score)
+    filename = 'highscores.txt'
+    save_numbers(phone_list, filename)
+    
 def load_numbers(numbers, filename):
     in_file = open(filename, "rt")
     while True:
@@ -37,12 +74,12 @@ def save_numbers(numbers, filename):
     out_file.close()
  
 def print_menu():
-    print('1. Print Phone Numbers')
-    print('2. Add a Phone Number')
-    print('3. Remove a Phone Number')
-    print('4. Lookup a Phone Number')
-    print('5. Load numbers')
-    print('6. Save numbers')
+    print('1. Print scores')
+    print('2. Add a score')
+    print('3, play quiz')
+    print('4. Lookup a pupil')
+    print('5. Load files')
+    print('6. Save files')
     print('7. Quit')
     print()
  
@@ -53,19 +90,19 @@ while True:
     menu_choice = int(input("Type in a number (1-7): "))
     if menu_choice == 1:
         print_numbers(phone_list)
-    elif menu_choice == 2:
+    elif menu_choice == 2:  #change!!
         print("Add Name and Number")
         name = input("Name: ")
         phone = input("Number: ")
         add_number(phone_list, name, phone)
-    elif menu_choice == 3:
-        print("Remove Name and Number")
-        name = input("Name: ")
-        remove_number(phone_list, name)
+
+        #remove_number(phone_list, name)
     elif menu_choice == 4:
         print("Lookup Number")
         name = input("Name: ")
         print(lookup_number(phone_list, name))
+    elif menu_choice == 3:
+        play()
     elif menu_choice == 5:
         filename = input("Filename to load: ")
         load_numbers(phone_list, filename)
