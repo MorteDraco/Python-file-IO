@@ -23,7 +23,7 @@ def add_number(numbers, name, number):
  
 def lookup_number(numbers, name): # look up a pupil - average
     if name in numbers: # search anme wiht number
-        return "score: " + numbers[name]
+        return "score: " + str(numbers[name])
     else:
         return name + " was not found"
  
@@ -84,8 +84,8 @@ def quiz2(): #part 2 of the quiz
     
     print('your score was '+score+'/10\n ')              #FIX THIS NOW!!!
     name = input(str('name:\n'))
-    with open("highscores.txt") as f:               # FIX PRITNG TOP 3 AND AVERAGES
-        for line in f : 
+   # with open("highscores.txt") as f:               # FIX PRITNG TOP 3 AND AVERAGES
+    #    for line in f : 
 
     
 def stats():  #AVERAGES
