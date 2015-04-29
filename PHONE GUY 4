@@ -5,14 +5,11 @@ def highscores(numbers):
     with open('highscores.txt', 'r') as r:
         for line in sorted(r): # sort linies 
             print(line, end='') # end the list of names
-
-
 def lookup_number(numbers, name): # look up a pupil - average
     if name in numbers: # search anme wiht number
         return "score: " + str(numbers[name])
     else:
         return name + " was not found"
-
 def play():
     '''play'''
     play = str(input('would you like to play?\n(yes / no)\n'))#take user input to check if they want to play again.
@@ -49,35 +46,21 @@ def quiz2(): #part 2 of the quiz
         quiz() #play the question
     score = str(score)
     print('your score was '+score+'/10\n ')
+    attempts = int(attempts)
     attempts = attempts + 1
     questions = 0
     quiz3()
 
 def quiz3():
     global questions, score, name, attempts
-    if attempts = 0:
+
+    while attempts <= 3:
         attempts = str(attempts)
         print(' ATTEMPT: '+ attempts +'')
-        attempts = int(attempts)
-        scores1 = (''+name+', '+score'')
-
-    elif attempts = 1:
-        attempts = str(attempts)
-        print(' ATTEMPT: '+ attempts +'')
-        attempts = int(attempts)
-        scores2 = (''+name+', '+score'')
-
-    elif attempts = 2:
-        attempts = str(attempts)
-        print(' ATTEMPT: '+ attempts +'')
-        attempts = int(attempts)
-        scores3 = (''+name+', '+score'')
-       
-               
-
-    quiz2()
-    attempts = int(attempts)
+        quiz2()
+    
     attempts = 0
+    menu()
     
 #### END QUIZ #####    
 def save_numbers(numbers, filename):
@@ -129,7 +112,7 @@ def averages():  #AVERAGES
 ##### END FUNCTION BLOCKS #####
 questions = 0
 score = 0
-attempts = 0
+attempts = 1
 phone_list = {} #EMPTY DICITONARY
 quizN = 0
 
