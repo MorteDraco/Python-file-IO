@@ -77,10 +77,10 @@ def load_numbers(numbers, filename): # AUTO LOAD
             break
         in_line = in_line[:-1]
         name, numberO, numberT, numbeF = in_line.split(",")
-        numbers[name] = numberO, numberT, numbeF
+        numbers[name] = numberO, numberT, numbeF    #### USE THIS!!!!! #####
     in_file.close()
 
-def averages():  #AVERAGES
+def averages(numbers, filename):  #AVERAGES
     print('\nHigh scores\n')
     with open("highscores.txt") as f:
 
@@ -106,7 +106,17 @@ def averages():  #AVERAGES
             averages.append((name, average))
 
         for name, average in sorted(averages, key=lambda a: a[1], reverse=True):
-            print(name, average)
+            f = open('highscores.txt', "rt")
+            while True:
+                f = f.readline()
+                if not in_line:
+                    break
+                in_line = in_line[:-1]
+                name, numberO, numberT, numbeF = in_line.split(",")
+                numbers2[name] = numberO, numberT, numbeF,
+            print(f)#### USE THIS!!!!! #####
+
+            f.close()
 
 
 ##### END FUNCTION BLOCKS #####
