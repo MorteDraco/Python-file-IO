@@ -1,0 +1,152 @@
+import collections, string
+#### START FUNCTION BLOCKS ###
+def highscores(numbers):
+    print('\nPeople who have taken quiz:\n')
+    with open('highscores.txt', 'r') as r:
+        for line in sorted(r): # sort linies 
+            print(line, end='') # end the list of names
+
+
+def lookup_number(numbers, name): # look up a pupil - average
+    if name in numbers: # search anme wiht number
+        return "score: " + str(numbers[name])
+    else:
+        return name + " was not found"
+
+def play():
+    '''play'''
+    play = str(input('would you like to play?\n(yes / no)\n'))#take user input to check if they want to play again.
+    if play == 'yes' or play == 'y': #user inputs yes
+        quiz2()
+    else:  #player reutrns no
+        print('Dont take '+ play + ' as an answer... play quiz!!!')
+        play2()
+def play2():
+    play()
+#### START QUIZ ##### 
+
+def quiz(): #part 1 of the quiz
+    '''quiz'''
+    global questions, score
+    userinput = input()
+    answer = 'hello'
+    
+    if userinput == answer:
+        print('correct')
+        questions = questions + 1 #add question number 
+        score = int(score)
+        score=score + 1
+        score = str(score)#convert to string to read
+
+    elif userinput != answer:
+        questions = questions + 1
+        print('wrong, answer was: '+answer+' duh!!')
+
+def quiz2(): #part 2 of the quiz
+    '''quiz2'''
+    global questions, score, name, attempts
+    while questions <= 9: #check if questions are below 10
+        quiz() #play the question
+    score = str(score)
+    print('your score was '+score+'/10\n ')
+    
+
+    attempts = attempts + 1
+    questions = 0
+    quiz3()
+
+def quiz3():
+    global questions, score, name, attempts
+    while attempts <=2:
+        attempts = str(attempts)
+        print(' ATTEMPT: '+ attempts +'')
+        quiz2()
+    f = open('highscores.txt', 'a')
+    name = input(str('\nName:'))
+    f.write(''+name', '+ score+'')
+    attempts = int(attempts)
+    attempts = 0
+    
+#### END QUIZ #####    
+def save_numbers(numbers, filename):
+    out_file = open('highscores.txt', "wt")
+    for k, v in numbers.items():
+        out_file.write(k + "," + v + "\n")
+    out_file.close()
+
+def load_numbers(numbers, filename): # AUTO LOAD
+    in_file = open('highscores.txt', "rt")
+    while True:
+        in_line = in_file.readline()
+        if not in_line:
+            break
+        in_line = in_line[:-1]
+        name, numberO, numberT, numbeF = in_line.split(",")
+        numbers[name] = numberO, numberT, numbeF
+    in_file.close()
+
+def averages():  #AVERAGES
+    print('\nHigh scores\n')
+    with open("highscores.txt") as f:
+
+        d = {}
+
+        for line in f:
+            column = line.split(",")
+            names = column[0]
+            scores = int(column[1].strip())
+            scores2  = int(column[2].strip())
+            scores3 = int(column[3].strip())
+
+            count = 0
+            while count < 1:
+               d.setdefault(names, []).append(scores)
+               d.setdefault(names, []).append(scores2)
+               d.setdefault(names, []).append(scores3)
+               count = count + 1
+
+        averages=[]
+        for name, v in d.items():
+            average = (sum(v[-3:])/(len(v[-3:])))
+            averages.append((name, average))
+
+        for name, average in sorted(averages, key=lambda a: a[1], reverse=True):
+            print(name, average)
+
+
+##### END FUNCTION BLOCKS #####
+questions = 0
+score = 0
+attempts = 0
+phone_list = {} #EMPTY DICITONARY
+quizN = 0
+
+def menu():
+    print('\n1. Print scores first 3')
+    print('2, play quiz')
+    print('3. Lookup a pupil')
+    print('4, prnt averages\n')
+    menu_choice = str(input("\nChoose: "))
+    filename = 'highscores.txt'  #AUTO LOAD
+    load_numbers(phone_list, filename)
+
+    if menu_choice == '1':
+        highscores(phone_list) # print high scores scors
+        menu()
+
+    elif menu_choice == '2': #play quiz
+        play()
+
+    elif menu_choice =='3':
+        print("Lookup Number")
+        name = input("Name: ")
+        print(lookup_number(phone_list, name))  # seacrh pupils
+        menu()
+
+    elif menu_choice == '4': #averages
+        stats()
+        menu()
+    else:
+        menu()
+
+menu()
