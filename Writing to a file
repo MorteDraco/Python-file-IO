@@ -1,0 +1,29 @@
+import csv
+newlist = []
+nam = input("Name")
+f2 = open("my file.csv", "rt")
+f1 = open("my file.csv", "at")
+#try:
+csv_f = csv.reader(f2)
+writer = csv.writer(f1)
+#writer.writerows(d)
+
+#writer.writerow( ("Hello") )
+#writer.writerow( ("Title 1", "Title 2", "Title 3") )
+#score = 10
+
+if nam == row[0]:
+    
+#writer.writerow( (nam, "10") )
+writer.writerow(columns[0] (nam, "11") )
+    #for i in range(10):
+        #writer.writerow( (i+2, chr(ord('r') +i), '09/%02d/07' % (i+1)) )
+#finally:
+    #f1.close()
+
+templist = []
+
+
+f1.close()
+
+    
