@@ -1,10 +1,12 @@
 import collections, string
 #### START FUNCTION BLOCKS ###
+
 def highscores(numbers):
     print('\nPeople who have taken quiz:\n')
     with open('highscores.txt', 'r') as r:
         for line in sorted(r): # sort linies 
             print(line, end='') # end the list of names
+
 def lookup_number(numbers, name): # look up a pupil - average
     if name in numbers: # search anme wiht number
         return "score: " + str(numbers[name])
@@ -22,7 +24,7 @@ def play2():
     play()
 #### START QUIZ ##### 
 
-def quiz(): #part 1 of the quiz
+def quiz(): #part 1 of the quiz - qeustions
     '''quiz'''
     global questions, score
     userinput = input()
@@ -39,26 +41,31 @@ def quiz(): #part 1 of the quiz
         questions = questions + 1
         print('wrong, answer was: '+answer+' duh!!')
 
-def quiz2(): #part 2 of the quiz
+def quiz2(phone_list): #part 2 of the quiz - attempts
     '''quiz2'''
     global questions, score, name, attempts
     while questions <= 9: #check if questions are below 10
         quiz() #play the question
     score = str(score)
     print('your score was '+score+'/10\n ')
+    out_file = open('highscores.txt', "wt")
+    for k, v in numbers.items():
+        out_file.write(k + "," + v + "\n")
+    out_file.close()
+
+    
     attempts = int(attempts)
     attempts = attempts + 1
     questions = 0
     quiz3()
 
-def quiz3():
+def quiz3(): #part 3- finihsing offf
     global questions, score, name, attempts
 
     while attempts <= 3:
         attempts = str(attempts)
         print(' ATTEMPT: '+ attempts +'')
-        quiz2()
-    
+        quiz2(phone_list)
     attempts = 0
     menu()
     
@@ -80,7 +87,7 @@ def load_numbers(numbers, filename): # AUTO LOAD
         numbers[name] = numberO, numberT, numbeF    #### USE THIS!!!!! #####
     in_file.close()
 
-def averages(numbers, filename):  #AVERAGES
+def stats(numbers, filename):  #AVERAGES
     print('\nHigh scores\n')
     with open("highscores.txt") as f:
 
@@ -104,19 +111,21 @@ def averages(numbers, filename):  #AVERAGES
         for name, v in d.items():
             average = (sum(v[-3:])/(len(v[-3:])))
             averages.append((name, average))
+        print(averages)
 
         for name, average in sorted(averages, key=lambda a: a[1], reverse=True):
-            f = open('highscores.txt', "rt")
+            in_line = open('highscores.txt', "rt")
             while True:
-                f = f.readline()
+                print(in_line )#### USE THIS!!!!! ####
+                in_line = in_line.readline()
                 if not in_line:
                     break
                 in_line = in_line[:-1]
                 name, numberO, numberT, numbeF = in_line.split(",")
-                numbers2[name] = numberO, numberT, numbeF,
-            print(f)#### USE THIS!!!!! #####
-
-            f.close()
+                numbers[name] = numberO, numberT, numbeF
+            in_line = str(in_line)
+            print(in_line )#### USE THIS!!!!! #####
+            in_line .close()
 
 
 ##### END FUNCTION BLOCKS #####
@@ -124,7 +133,7 @@ questions = 0
 score = 0
 attempts = 1
 phone_list = {} #EMPTY DICITONARY
-quizN = 0
+name = str(input('name:'))
 
 def menu():
     print('\n1. Print scores first 3')
@@ -144,12 +153,12 @@ def menu():
 
     elif menu_choice =='3':
         print("Lookup Number")
-        name = input("Name: ")
-        print(lookup_number(phone_list, name))  # seacrh pupils
+        name1 = input("Name: ")
+        print(lookup_number(phone_list, name1))  # seacrh pupils
         menu()
 
     elif menu_choice == '4': #averages
-        stats()
+        stats(phone_list, filename)
         menu()
     else:
         menu()
